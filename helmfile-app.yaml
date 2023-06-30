@@ -1,0 +1,23 @@
+helmDefaults:
+  verify: false
+  wait: false
+  createNamespace: false
+  insecureSkipTLSVerify: true
+  force: true
+
+releases:
+- name: ca-server-service
+  chart: cnp/ca-server-service 
+  version: 0.1.0
+  values:
+  - comstar:
+      selectorLabels:
+        comstar/app_type: java
+      image:
+        tag: 7.1.0.0-SNAPSHOT
+      extEnvs:
+      - name: JAVA_OPTS
+        value: "-Xms2g -Xmx2g"
+      - name: DUBBO_REGISTRY_TIMEOUT
+        value: "20000"
+
